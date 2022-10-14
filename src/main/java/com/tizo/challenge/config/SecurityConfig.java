@@ -37,10 +37,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-                .antMatchers("usuarios/editar/**", "usuarios/agregar/**", "usuarios/eliminar/**", "/editar/**", "/agregar/**", "/eliminar/**")
+                .antMatchers("usuarios/**", "usuarios/**", "usuarios/**")
                 .hasRole("ADMIN")
                 .antMatchers("/")
                 .hasAnyRole("ADMIN", "USER")
+                .and()
+                .formLogin()
+                .loginPage("/login")
                 .and()
                 .exceptionHandling().accessDeniedPage("/errores/403");
     }
